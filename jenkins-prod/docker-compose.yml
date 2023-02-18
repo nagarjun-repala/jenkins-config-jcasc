@@ -1,0 +1,20 @@
+version: '3'
+services:
+    jenkins:
+        container_name: jenkins-master-prod
+        image: jenkins-master-prod:v1
+        build:
+            context: Jenkins
+        ports:
+            - "8080:8080"
+            - "50000:50000"
+        volumes:
+            - "jenkins-prod:/var/jenkins_home"
+        environment:
+            - CASC_JENKINS_CONFIG=/jenkins_config/jenkins.yaml
+        networks:
+            - jenkins-prod
+networks:
+  jenkins-prod:
+volumes:
+  jenkins-prod:
